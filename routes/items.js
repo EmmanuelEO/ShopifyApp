@@ -36,8 +36,29 @@ router.post('/', [
 
 // @route       PUT api/items/:id
 // @desc        Edit an Inventory Item
-router.put('/:id', (req, res) => {
-    res.send('Edit an inventory item.')
+router.put('/:id', async (req, res) => {
+    const { name } = req.body
+
+    // Creating a new inventory item
+    const newItem = {}
+    if (name) newItem.name = name
+
+    try {
+        let item = await Item.findById(req.params.id)
+
+        if (!item) {
+            return res.status(404).json({ msg: "Item not found" })
+        }
+
+        item = await Item.findByIdAndUpdate(req.params.id, 
+            { $set: newItem },
+            { new: true })
+        
+        res.json(item)
+    } catch (err) {
+        console.error(err.message)
+        res.status(500).send('Server error')
+    }
 })
 
 
@@ -45,7 +66,7 @@ router.put('/:id', (req, res) => {
 // @desc        View all Inventory Items
 router.get('/', async (req, res) => {
     try {
-        const item = await Item.find()
+        const item = await Item.find().sort({ date: -1 })
         res.json(item)
     } catch (err) {
         console.error(err.message)
@@ -55,8 +76,8 @@ router.get('/', async (req, res) => {
 
 // @route       DELETE api/items/:id
 // @desc        Delete an Inventory Item
-router.post('/:id', (req, res) => {
-    res.send('Delete an inventory item.')
+router.delete('/:id', async (req, res) => {
+    
 })
 
 module.exports = router 
