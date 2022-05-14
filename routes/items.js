@@ -44,7 +44,13 @@ router.put('/:id', (req, res) => {
 // @route       GET api/items
 // @desc        View all Inventory Items
 router.get('/', async (req, res) => {
-    
+    try {
+        const item = await Item.find()
+        res.json(item)
+    } catch (err) {
+        console.error(err.message)
+        res.status(500).send('Server Error')
+    }
 })
 
 // @route       DELETE api/items/:id
