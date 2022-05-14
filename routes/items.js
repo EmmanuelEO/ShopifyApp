@@ -77,7 +77,20 @@ router.get('/', async (req, res) => {
 // @route       DELETE api/items/:id
 // @desc        Delete an Inventory Item
 router.delete('/:id', async (req, res) => {
-    
+    try {
+        let item = await Item.findById(req.params.id)
+
+        if (!item) {
+            return res.status(404).json({ msg: "Item not found" })
+        }
+
+        await Item.findByIdAndRemove(req.params.id)
+        
+        res.json({ msg: 'Item has now been removed.' })
+    } catch (err) {
+        console.error(err.message)
+        res.status(500).send('Server error')
+    }
 })
 
 module.exports = router 
