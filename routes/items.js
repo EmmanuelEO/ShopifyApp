@@ -1,12 +1,20 @@
 const express = require('express')
 const res = require('express/lib/response')
-
 const router = express.Router()
+const { body, validationResult } = require('express-validator');
+
+const item = require('../models/Item')
 
 // @route       POST api/items
 // @desc        Create an Inventory Item
-router.post('/', (req, res) => {
-    res.send('Create an inventory item.')
+router.post('/', [
+    body('name', "Item's name is required").not().isEmpty()
+], (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() })
+    }
+    
 })
 
 // @route       PUT api/items/:id
