@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
-    "frontend": "npm start --prefix /Users/emmanuelokonkwo/Desktop/shopify/frontend",
+    "frontend": "npm start --prefix frontend",
     "frontendinstall": "npm install --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run frontend\" "
   },
