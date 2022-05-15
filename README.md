@@ -1,4 +1,4 @@
-# ShopifyApp to help users to manager their Inventory
+# ShopifyApp to help users effectively manage their Inventory
 
 ## Customized the App with Basic CRUD functionality to include:
 - Creating Inventory Items
