@@ -25,7 +25,7 @@ const ItemState = (props) => {
   // Get Items
   const getItems = async () => {
     try {
-      const res = await axios.get("/api/items");
+      const res = await axios.get("http://localhost:3000/api/items");
       dispatch({ type: GET_ITEMS, payload: res.data });
     } catch (err) {
       dispatch({ type: ITEM_ERROR, payload: err.response.msg });
@@ -41,7 +41,7 @@ const ItemState = (props) => {
     };
 
     try {
-      const res = await axios.post("/api/items", item, config);
+      const res = await axios.post("http://localhost:3000/api/items", item, config);
       dispatch({ type: ADD_ITEM, payload: res.data });
       return "true"
     } catch (err) {
@@ -53,7 +53,7 @@ const ItemState = (props) => {
   // Delete Item
   const deleteItem = async id => {
     try {
-      await axios.delete(`/api/items/${id}`);
+      await axios.delete(`http://localhost:3000/api/items/${id}`);
       dispatch({ type: DELETE_ITEM, payload: id });
     } catch (err) {
       dispatch({ type: ITEM_ERROR, payload: err.response.msg });
@@ -71,7 +71,7 @@ const ItemState = (props) => {
     };
 
     try {
-      const res = await axios.put(`/api/items/${item._id}`, item, config);
+      const res = await axios.put(`http://localhost:3000/api/items/${item._id}`, item, config);
       dispatch({ type: UPDATE_ITEM, payload: res.data });
     } catch (err) {
       dispatch({ type: ITEM_ERROR, payload: err.response.msg });
