@@ -25,6 +25,7 @@ const ItemState = (props) => {
   // Get Items
   const getItems = async () => {
     try {
+      console.log("Here")
       const res = await axios.get("http://localhost:3000/api/items");
       dispatch({ type: GET_ITEMS, payload: res.data });
     } catch (err) {
