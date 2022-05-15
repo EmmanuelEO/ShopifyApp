@@ -7,3 +7,10 @@
     - Viewing the Inventory Items
 
   ## 2. Integrated the ability of creating warehouses/locations and assigning each inventory to their specific location
+  
+  ## 3. To run code and see the app on Replit, include the following:
+   ### Select Language:
+    Node.js
+   ### Run Command:
+    npm run dev
+    
