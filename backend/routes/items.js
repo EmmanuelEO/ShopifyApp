@@ -8,13 +8,14 @@ const Item = require('../models/Item')
 // @route       POST api/items
 // @desc        Create an Inventory Item
 router.post('/', [
-    body('name', "Item's name is required").not().isEmpty()
+    body('name', "Item's name is required").not().isEmpty(),
+    body('location', "Item's Inventory Location is required").not().isEmpty()
 ], async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() })
     }
-    const { name } = req.body
+    const { name, location } = req.body
 
     try {
         let item = await Item.findOne({ name })
@@ -23,7 +24,10 @@ router.post('/', [
             return res.status(400).json({ msg: 'The item already exists' })
         }
 
-        item = new Item({ name })
+        item = new Item({ 
+            name,
+            location 
+         })
 
         await item.save()
 
@@ -37,11 +41,12 @@ router.post('/', [
 // @route       PUT api/items/:id
 // @desc        Edit an Inventory Item
 router.put('/:id', async (req, res) => {
-    const { name } = req.body
+    const { name, location } = req.body
 
     // Creating a new inventory item
     const newItem = {}
     if (name) newItem.name = name
+    if (location) newItem.location = location
 
     try {
         let item = await Item.findById(req.params.id)

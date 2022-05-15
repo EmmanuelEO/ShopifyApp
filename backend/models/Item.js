@@ -6,6 +6,10 @@ const ItemSchema = mongoose.Schema({
         required: true,
         unique: true
     },
+    location: {
+        type: String,
+        required: true
+    },
     date: {
         type: Date, 
         default: Date.now

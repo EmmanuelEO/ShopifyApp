@@ -5,8 +5,6 @@ import {
     SET_CURRENT,
     CLEAR_CURRENT,
     UPDATE_ITEM,
-    FILTER_ITEMS,
-    CLEAR_FILTER,
     ITEM_ERROR,
     CLEAR_ITEMS,
 } from "../types";
@@ -45,7 +43,6 @@ const itemReducer = (state, action) => {
             return {
                 ...state, 
                 items: null,
-                filtered: null,
                 error: null,
                 current: null
             }
@@ -58,20 +55,6 @@ const itemReducer = (state, action) => {
         return {
             ...state,
             current: null,
-        };
-        case FILTER_ITEMS:
-        return {
-            ...state,
-            filtered: state.items.filter((item) => {
-            // Here the parameter 'gi' means 'Global and Insensitive'
-            const regex = new RegExp(`${action.payload}`, "gi");
-            return item.name.match(regex) || item.email.match(regex);
-            }),
-        };
-        case CLEAR_FILTER:
-        return {
-            ...state,
-            filtered: null,
         };
         case ITEM_ERROR:
         return {

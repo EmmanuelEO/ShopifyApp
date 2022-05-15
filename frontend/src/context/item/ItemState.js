@@ -2,7 +2,6 @@ import React, { useReducer } from "react";
 import axios from "axios";
 import ItemContext from "./itemContext";
 import itemReducer from "./itemReducer";
-import AlertContext from "../alert/alertContext";
 import {
   GET_ITEMS,
   ADD_ITEM,
@@ -10,9 +9,7 @@ import {
   SET_CURRENT,
   CLEAR_CURRENT,
   UPDATE_ITEM,
-  FILTER_ITEMS,
   CLEAR_ITEMS,
-  CLEAR_FILTER,
   ITEM_ERROR,
 } from "../types";
 
@@ -20,7 +17,6 @@ const ItemState = (props) => {
   const initialState = {
     items: null,
     current: null,
-    filtered: null,
     error: null,
   };
 
@@ -102,7 +98,6 @@ const ItemState = (props) => {
       value={{
         items: state.items,
         current: state.current,
-        filtered: state.filtered,
         error: state.error,
         addItem,
         deleteItem,

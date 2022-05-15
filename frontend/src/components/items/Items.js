@@ -6,7 +6,7 @@ import Spinner from '../layout/Spinner'
 const Items = () => {
   const itemContext = useContext(ItemContext);
 
-  const { items, filtered, getItems, loading } = itemContext;
+  const { items, getItems, loading } = itemContext;
 
   useEffect(() => {
     getItems();
@@ -19,14 +19,9 @@ const Items = () => {
 
   return (
     <Fragment>
-      {console.log(items)}
       {items !== null && !loading ? 
       (<Fragment>
-        {filtered !== null
-        ? filtered.map((item) => (
-            <Item key={item._id} item={item} />
-          ))
-        : items.map((item) => (
+        {items.map((item) => (
             <Item key={item._id} item={item} />
         ))}
         </Fragment>)
