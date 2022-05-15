@@ -27,7 +27,7 @@ router.post('/', [
 
         await item.save()
 
-        res.send('Item has been saved.')
+        res.json(item)
     } catch (err) {
         console.error(err.message)
         res.status(500).send('Server error')
