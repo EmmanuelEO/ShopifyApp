@@ -71,6 +71,7 @@ router.put('/:id', async (req, res) => {
 // @desc        View all Inventory Items
 router.get('/', async (req, res) => {
     try {
+        console.log("object");
         const item = await Item.find().sort({ date: -1 })
         res.json(item)
     } catch (err) {
